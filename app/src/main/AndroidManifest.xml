@@ -2,6 +2,12 @@
 
     package="com.example.damei.miniweather">
 
+    <!--访问网络状态的权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <!--访问INTERNET的权限-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +23,10 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <!--注册选择城市的Activity-->
+        <activity android:name=".SelectCity">
         </activity>
 
     </application>
