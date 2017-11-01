@@ -8,7 +8,9 @@
     <!--访问INTERNET的权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <!--第一行表示注册Application-->
     <application
+        android:name="cn.edu.pku.huangjiamei.app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
