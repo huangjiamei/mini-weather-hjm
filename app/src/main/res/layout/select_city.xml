@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/title_top"
         android:layout_width="fill_parent"
         android:layout_height="45.0dp"
         android:background="#ffcd2626">
@@ -38,4 +39,19 @@
         android:layout_height="wrap_content"
         android:text="我是一个临时的TextView，这里是选择城市界面"/>
     -->
+
+    <!--添加选择城市的布局和listview控件-->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_top">
+
+        <ListView
+            android:id="@+id/title_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+        </ListView>
+
+    </RelativeLayout>
 </RelativeLayout>

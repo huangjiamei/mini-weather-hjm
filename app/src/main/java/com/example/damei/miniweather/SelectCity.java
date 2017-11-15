@@ -3,8 +3,27 @@ package com.example.damei.miniweather;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import cn.edu.pku.huangjiamei.app.MyApplication;
+import cn.edu.pku.huangjiamei.bean.City;
 
 /**
  * Created by damei on 17/10/18.
@@ -12,14 +31,25 @@ import android.widget.ImageView;
 
 public class SelectCity extends Activity implements View.OnClickListener{
     private ImageView mBackBtn;
+
+    private ClearEditText mClearEditText;
+    private ListView mList;
+    private List<City> cityList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_city);
 
         //为选择城市界面的返回(ImageView)设置点击事件
+        /*
         mBackBtn = (ImageView) findViewById(R.id.title_back);
         mBackBtn.setOnClickListener(this);
+        */
+
+        //调用initView方法
+        initViews();
     }
 
     @Override
@@ -36,4 +66,117 @@ public class SelectCity extends Activity implements View.OnClickListener{
                 break;
         }
     }
+
+    //城市列表展示
+    private void initViews() {
+        //为mBackBtn设置监听事件
+        mBackBtn = (ImageView) findViewById(R.id.title_back);
+        mBackBtn.setOnClickListener(this);
+
+        mList = (ListView) findViewById(R.id.title_list);
+        MyApplication myApplication = (MyApplication) getApplication();
+        cityList = myApplication.getCityList();
+
+        /*
+        //将数组作为数据源，填充的是ArrayAdapter
+        String[] data = new String[cityList.size()];
+        int i = 0;
+        for(City city : cityList){
+            data[i] = city.getCity();
+            data[i] += "  ";
+            data[i] += city.getNumber();
+            System.out.println(data[i]);
+            i++;
+            cityList.add(city);
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SelectCity.this, android.R.layout.simple_list_item_1, data);
+        */
+
+        //将List作为数据源，填充SimpleAdapter
+        //生成动态数组并转载数据
+        ArrayList<HashMap<String,String>> mylist = new ArrayList<HashMap<String,String>>();
+        for(City city : cityList) {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("City", city.getCity());
+            map.put("Number", city.getNumber());
+            mylist.add(map);
+        }
+        //生成适配器
+        //参数分别对应this，mylist，数据来源（item的xml实现），item的xml文件中的两个textview id
+        SimpleAdapter adapter = new SimpleAdapter(this, mylist,R.layout.item, new String[]{"City","Number"}, new int[]{R.id.list_city_name, R.id.list_city_number});
+        //添加并显示
+        mList.setAdapter(adapter);
+
+        // 设置ListView条目点击事件
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                City city = cityList.get(position);
+                Intent i = new Intent();
+                i.putExtra("cityCode", city.getNumber());
+                setResult(RESULT_OK, i);
+                finish();
+            }
+        });
+    }
+        /*
+        mClearEditText = (ClearEditText) findViewById(R.id.search_city);
+
+        for(City city : cityList)
+            filterDateList.add(city);
+        //适配器
+        ArrayAdapter<String> myadapter = new ArrayAdapter<String>(SelectCity.this, cityList);
+        mList.setAdapter(myadapter);
+
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                City city = filterDateList.get(position);
+                Intent i = new Intent();
+                i.putExtra("cityCode", city.getNumber());
+                setResult(RESULT_OK, i);
+                finish();
+            }
+        });
+
+        //根据输入框输入的值的改变来过滤搜索
+        mClearEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //当输入框里面的值为空时，更新为原来的列表，否则为过滤数据列表
+                filterData(charSequence.toString());
+                mList.setAdapter(myadapter);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+    }
+
+    //根据输入框中的值来过滤数据并更新ListView
+    private void filterData(String filterStr) {
+        filterDateList = new ArrayList<City>();
+        Log.d("Filger", filterStr);
+        if(TextUtils.isEmpty(filterStr)) {
+            for(City city : cityList)
+                filterDateList.add(city);
+        } else {
+            filterDateList.clear();
+            for(City city : cityList) {
+                if(city.getCity().indexOf(filterStr.toString())!=-1)
+                    filterDateList.add(city);
+            }
+        }
+        myadapter.updateListView(filterDateList);
+    }
+    */
+
 }

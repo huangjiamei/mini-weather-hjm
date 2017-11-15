@@ -103,4 +103,9 @@ public class MyApplication extends Application {
         return true;
     }
 
+    //返回城市列表
+    public List<City> getCityList() {
+        return mCityList;
+    }
+
 }
