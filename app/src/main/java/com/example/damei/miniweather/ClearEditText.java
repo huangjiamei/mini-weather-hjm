@@ -75,7 +75,7 @@ public class ClearEditText extends android.support.v7.widget.AppCompatEditText i
                 getCompoundDrawables()[3]);
     }
 
-    //当输入框里面的内容发生变化的时候回掉的方法
+    //当输入框里面的内容发生变化的时候回调的方法
     @Override
     public void onTextChanged(CharSequence s, int start, int count, int after) {
         setClearIconVisible(s.length() > 0);

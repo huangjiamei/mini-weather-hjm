@@ -40,7 +40,7 @@
         android:text="我是一个临时的TextView，这里是选择城市界面"/>
     -->
 
-    <!--添加选择城市的布局和listview控件-->
+    <!--选择城市的布局和listview控件-->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -54,4 +54,21 @@
         </ListView>
 
     </RelativeLayout>
+
+    <!--搜索城市的组件-->
+    <com.example.damei.miniweather.ClearEditText
+        android:id="@+id/search_city"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4.0dp"
+        android:hint="搜索全国城市（中文）"
+        android:drawableLeft="@drawable/magnifying_glass"
+        android:drawablePadding="6.0dp"
+        android:singleLine="true"
+        android:background="@drawable/contact_search_box_edittext_keyword_background"
+        android:textColor="#ff000000"
+        android:textColorHint="#ffcccccc"
+        android:textSize="15.0dp"
+        />
+
 </RelativeLayout>
