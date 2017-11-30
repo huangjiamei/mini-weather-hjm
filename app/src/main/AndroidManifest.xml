@@ -19,17 +19,31 @@
         android:theme="@style/AppTheme">
 
         <!--注册activity-->
-        <activity android:name=".MainActivity">
-            <!--指定主activity-->
+
+        <activity android:name=".Guide">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+        </activity>
+
+        <activity android:name=".MainActivity">
+            <!--指定主activity-->
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            -->
         </activity>
 
         <!--注册选择城市的Activity-->
         <activity android:name=".SelectCity">
         </activity>
+
+
 
     </application>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff0000ff">
+
+    !--首先更改page3的页面布局方式为相对布局
+    然后添加一个线性布局
+    然后添加一个button控件
+    -->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:paddingBottom="30dp">
+        <Button
+            android:id="@+id/btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="开始体验"/>
+    </LinearLayout>
+
+</RelativeLayout>
