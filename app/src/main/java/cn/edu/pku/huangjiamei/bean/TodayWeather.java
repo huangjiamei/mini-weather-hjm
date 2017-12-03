@@ -4,7 +4,7 @@ package cn.edu.pku.huangjiamei.bean;
  * Created by damei on 17/10/18.
  */
 
-public class TodayWeather {
+public class TodayWeather implements Cloneable{
     private String city;
     private String updatetime;
     private String wendu;
@@ -112,6 +112,18 @@ public class TodayWeather {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+
+    @Override
+    public Object clone() {
+        TodayWeather cloneObj = null;
+        try{
+            cloneObj = (TodayWeather) super.clone();
+        }catch(CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return cloneObj;
     }
 
     @Override
